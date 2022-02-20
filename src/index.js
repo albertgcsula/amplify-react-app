@@ -1,13 +1,18 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import { AmplifyProvider } from '@aws-amplify/ui-react';
+import Amplify from 'aws-amplify';
+import config from './aws-exports';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 
+Amplify.configure(config);
+
 ReactDOM.render(
-  <React.StrictMode>
+  <AmplifyProvider>
     <App />
-  </React.StrictMode>,
+  </AmplifyProvider>,
   document.getElementById('root')
 );
 
