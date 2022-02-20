@@ -6,7 +6,7 @@ function App() {
     <div className="App">
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
-        <p>ReactJS App on AWS Amplify.</p>
+        <p>ReactJS Starter App on AWS Amplify.</p>
       </header>
     </div>
   );
