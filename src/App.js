@@ -1,6 +1,10 @@
 import React, { useState, useEffect } from 'react';
-import '@aws-amplify/ui-react/styles.css';
-import { withAuthenticator } from '@aws-amplify/ui-react';
+import { 
+  Button,
+  Flex,
+  TextField,
+  withAuthenticator
+} from '@aws-amplify/ui-react';
 import { API, Storage } from 'aws-amplify';
 import { listPosts } from './graphql/queries';
 import { createPost as createPostMutation, deletePost as deletePostMutation } from './graphql/mutations';
@@ -8,7 +12,7 @@ import './App.css';
 
 const initialFormState = { title: '', excerpt: '', contents: '', image: '' };
 
-function App() {
+function App({ signOut, user }) {
   const [posts, setPosts] = useState([]);
   const [formData, setFormData] = useState(initialFormState);
 
@@ -57,39 +61,65 @@ function App() {
   return (
     <div className="App">
       <h1>React Posts App</h1>
-      <input
-        onChange={e => setFormData({ ...formData, 'title': e.target.value})}
+      <Flex id="authentication">
+        <h4>Hello {user.username}</h4>
+        <Button
+          variation="link"
+          onClick={signOut}
+        >
+          Sign out
+        </Button>
+      </Flex>
+      <TextField
+        label="Title"
         placeholder="Post title"
+        onChange={e => setFormData({ ...formData, 'title': e.target.value})}
         value={formData.title}
       />
-      <input
-        onChange={e => setFormData({ ...formData, 'excerpt': e.target.value})}
+      <TextField
+        label="Excerpt"
         placeholder="Post excerpt"
+        onChange={e => setFormData({ ...formData, 'excerpt': e.target.value})}
         value={formData.excerpt}
       />
-      <textarea
-        onChange={e => setFormData({ ...formData, 'contents': e.target.value })}
+      <TextField
+        isMultiline={true}
+        label="Contents"
         placeholder="Post contents"
+        onChange={e => setFormData({ ...formData, 'contents': e.target.value })}
         value={formData.contents}
       />
-      <input
-        type="file"
-        onChange={onChange}
-      />
-      <button onClick={createPost}>Create Post</button>
+      <div>
+        <label for="postimage">Choose an image: </label>
+        <input
+          id="postimage" 
+          name="postimage"
+          type="file"
+          accept="image/png, image/jpeg"
+          onChange={onChange}
+        />
+      </div>
+      <Button
+        variation="primary"
+        onClick={createPost}
+      >
+        Create Post
+      </Button>
       <div style={{marginBottom: 30}}>
         {
           posts.map(post => (
-            <div key={post.id || post.name}>
+            <div key={post.id || post.title}>
               <h2>{post.title}</h2>
               <p>{post.excerpt}</p>
               <div>
                 {post.contents}
               </div>
               {post.image && (
-                <img src={post.image} style={{ width: 400 }} />
+                <div>
+                  <img src={post.image} style={{ width: 400 }} />
+                </div>
               )}
-              <button onClick={() => deletePost(post)}>Delete Post</button>
+              <Button onClick={() => deletePost(post)}>Delete Post</Button>
             </div>
           ))
         }

@@ -1,6 +1,13 @@
-# Getting Started with Create React App
+# AWS Amplify React App
+A starter ReactJS app hosted with [AWS Amplify](https://aws.amazon.com/amplify/).
+
+This app allows users to sign in via [AWS Cognito](https://aws.amazon.com/cognito/) and create and view posts.
+The posts are stored and fetched using a GraphQL API that leverages AWS AppSync which is backed by Amazon DynamoDB.
+The app also uses [AWS S3](https://aws.amazon.com/s3/) to enable image uploading, fetching, and rendering.
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+
+This project also uses elements from [Amplify UI](https://ui.docs.amplify.aws/).
 
 ## Available Scripts
 
