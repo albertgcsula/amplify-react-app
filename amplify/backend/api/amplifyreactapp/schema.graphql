@@ -9,3 +9,4 @@ type Post @model {
   contents: String
   image: String
 }
+ 

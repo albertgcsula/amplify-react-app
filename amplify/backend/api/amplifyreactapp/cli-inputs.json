@@ -3,10 +3,21 @@
   "serviceConfiguration": {
     "apiName": "amplifyreactapp",
     "serviceName": "AppSync",
-    "gqlSchemaPath": "/Users/albert/Documents/2022/web/amplify-react-app/amplify/backend/api/amplifyreactapp/schema.graphql",
+    "gqlSchemaPath": "/tmp/amplify-b6620b41-bd18-4e31-ad12-1830b39d531e/amplify/backend/api/amplifyreactapp/schema.graphql",
     "defaultAuthType": {
       "mode": "API_KEY",
-      "expirationTime": 7
-    }
+      "keyDescription": "api key description",
+      "expirationTime": 30
+    },
+    "conflictResolution": {
+      "defaultResolutionStrategy": {
+        "type": "AUTOMERGE"
+      }
+    },
+    "additionalAuthTypes": [
+      {
+        "mode": "AWS_IAM"
+      }
+    ]
   }
 }
